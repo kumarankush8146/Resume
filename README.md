@@ -1,1 +1,7 @@
-# Resume
+--Users (Parent/Child)  
+--│  
+--├── Tasks (Parent-created tasks)  
+--│  
+--└── Assigned_Tasks (Child-specific assignments)  
+--     │  
+--     └── Transactions (Payment records)  
