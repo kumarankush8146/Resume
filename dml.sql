@@ -1,58 +1,77 @@
--- Users table sample data
-INSERT INTO Users (name, email, role, balance)
+INSERT INTO Users (name, email, role, REWARD_POINTS)
 VALUES ('Ramesh Kumar', 'ramesh@example.com', 'parent', 0.00);
 
-INSERT INTO Users (name, email, role, balance)
+INSERT INTO Users (name, email, role, REWARD_POINTS)
 VALUES ('Suresh Singh', 'suresh@example.com', 'parent', 0.00);
 
-INSERT INTO Users (name, email, role, balance)
-VALUES ('Chotu', 'chotu@example.com', 'child', 100.00);
+INSERT INTO Users (name, email, role, REWARD_POINTS)
+VALUES ('Chotu', 'chotu@example.com', 'child', 50.00);
 
-INSERT INTO Users (name, role, balance)
-VALUES ('Pappu', 'child', 150.00);
-
-
--- Tasks table sample data
-INSERT INTO Tasks (title, description, reward_amount, created_by)
-VALUES ('Clean Room', 'Clean your room thoroughly', 50.00, 1);
-
-INSERT INTO Tasks (title, description, reward_amount, created_by)
-VALUES ('Do Homework', 'Finish your math and science homework', 30.00, 2);
-
--- Assigned_tasks table sample data
---
--- Record 1: Status 'assigned' – Task is assigned.
-INSERT INTO Assigned_tasks (task_id, child_id, status, assigned_by, due_date)
-VALUES (1, 3, 'assigned', 1, CURRENT_TIMESTAMP + 2);
-
--- Record 2: Status 'in_progress' – Task in progress.
-INSERT INTO Assigned_tasks (task_id, child_id, status, assigned_by, due_date)
-VALUES (2, 4, 'in_progress', 2, CURRENT_TIMESTAMP + 3);
-
--- Record 3: Status 'submitted' – Due date passed and task is submitted.
-INSERT INTO Assigned_tasks (task_id, child_id, status, assigned_by, due_date, completion_date)
-VALUES (1, 3, 'submitted', 1, CURRENT_TIMESTAMP - 1, CURRENT_TIMESTAMP);
-
--- Record 4: Status 'approved' – Parent approved the task.
-INSERT INTO Assigned_tasks (task_id, child_id, status, assigned_by, due_date, completion_date)
-VALUES (2, 4, 'approved', 2, CURRENT_TIMESTAMP + 3, CURRENT_TIMESTAMP);
+INSERT INTO Users (name, email, role, REWARD_POINTS)
+VALUES ('Pappu', 'pappu@example.com', 'child', 75.00);
 
 
--- Transactions table sample data
---
--- Record 1: Pending transaction – Payment process pending.
-INSERT INTO Transactions (parent_id, child_id, amount, task_id, status)
-VALUES (1, 3, 50.00, 1, 'pending');
+INSERT INTO General_Tasks (title, description, reward_points)
+VALUES ('Clean Room', 'Clean your room thoroughly', 20.00);
 
--- Record 2: Success transaction – Payment successfully processed.
-INSERT INTO Transactions (parent_id, child_id, amount, task_id, status)
-VALUES (2, 4, 30.00, 2, 'success');
+INSERT INTO General_Tasks (title, description, reward_points)
+VALUES ('Do Homework', 'Complete your math homework', 15.00);
 
--- Record 3: Failed transaction – Payment process failed.
-INSERT INTO Transactions (parent_id, child_id, amount, task_id, status)
-VALUES (1, 3, 50.00, 1, 'failed');
+INSERT INTO General_Tasks (title, description, reward_points)
+VALUES ('Water Plants', 'Water all the plants in the house', 10.00);
 
--- Record 4: Another Pending transaction – Duplicate scenario different edge case.
-INSERT INTO Transactions (parent_id, child_id, amount, task_id, status)
-VALUES (2, 4, 30.00, 2, 'pending');
+INSERT INTO General_Tasks (title, description, reward_points)
+VALUES ('Walk Dog', 'Take the dog for a walk in the park', 25.00);
+
+
+INSERT INTO User_Tasks (created_by, title, description, reward_points, assigned_to, due_date, completion_date, priority, progress, status, frequency, category)
+VALUES (1, 'Mop Floor', 'Mop the kitchen floor properly', 30.00, 3, CURRENT_TIMESTAMP + 1, NULL, 'high', 0, 'assigned', 'daily', 'chores');
+
+INSERT INTO User_Tasks (created_by, title, description, reward_points, assigned_to, due_date, completion_date, priority, progress, status, frequency, category)
+VALUES (2, 'Complete Project', 'Finish the school project on time', 50.00, 4, CURRENT_TIMESTAMP + 3, CURRENT_TIMESTAMP + 4, 'medium', 50, 'in_progress', 'weekly', 'study');
+
+INSERT INTO User_Tasks (created_by, title, description, reward_points, assigned_to, due_date, completion_date, priority, progress, status, frequency, category)
+VALUES (1, 'Prepare Lunch', 'Prepare a healthy lunch for the family', 20.00, 3, CURRENT_TIMESTAMP + 1, CURRENT_TIMESTAMP + 1, 'low', 100, 'approved', 'daily', 'chores');
+
+INSERT INTO User_Tasks (created_by, title, description, reward_points, assigned_to, due_date, completion_date, priority, progress, status, frequency, category)
+VALUES (2, 'Clean Desk', 'Organize and clean your study desk', 10.00, 4, CURRENT_TIMESTAMP + 2, NULL, 'low', 0, 'assigned', 'daily', 'chores');
+
+
+INSERT INTO Frequency (frequency_name)
+VALUES ('daily');
+
+INSERT INTO Frequency (frequency_name)
+VALUES ('weekly');
+
+INSERT INTO Frequency (frequency_name)
+VALUES ('monthly');
+
+INSERT INTO Frequency (frequency_name)
+VALUES ('yearly');
+
+
+INSERT INTO GOALS (category, category_id, child_id, created_by, status, due_date, completion_date, progress)
+VALUES ('daily', 1, 3, 1, 'assigned', CURRENT_TIMESTAMP + 1, NULL, 0);
+
+INSERT INTO GOALS (category, category_id, child_id, created_by, status, due_date, completion_date, progress)
+VALUES ('weekly', 2, 4, 2, 'in_progress', CURRENT_TIMESTAMP + 3, NULL, 30);
+
+INSERT INTO GOALS (category, category_id, child_id, created_by, status, due_date, completion_date, progress)
+VALUES ('monthly', 3, 3, 1, 'submitted', CURRENT_TIMESTAMP + 10, CURRENT_TIMESTAMP + 11, 80);
+
+INSERT INTO GOALS (category, category_id, child_id, created_by, status, due_date, completion_date, progress)
+VALUES ('daily', 1, 4, 2, 'approved', CURRENT_TIMESTAMP + 1, CURRENT_TIMESTAMP, 100);
+
+
+INSERT INTO Transactions (parent_id, child_id, reward_points, task_id, status)
+VALUES (1, 3, 30.00, 1, 'pending');
+
+INSERT INTO Transactions (parent_id, child_id, reward_points, task_id, status)
+VALUES (2, 4, 50.00, 2, 'success');
+
+INSERT INTO Transactions (parent_id, child_id, reward_points, task_id, status)
+VALUES (1, 3, 20.00, 3, 'failed');
+
+INSERT INTO Transactions (parent_id, child_id, reward_points, task_id, status)
+VALUES (2, 4, 10.00, 4, 'pending');
 
