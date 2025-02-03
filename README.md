@@ -1,7 +1,7 @@
 --Users (Parent/Child)  
 --│  
---├── Tasks (Parent-created tasks)  
+--├── System defined tasks OR User created tasks
 --│  
---└── Assigned_Tasks (Child-specific assignments)  
+--└── With goals based on frequency 
 --     │  
 --     └── Transactions (Payment records)  
